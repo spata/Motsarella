@@ -1,0 +1,29 @@
+
+<head>
+<link href='http://fonts.googleapis.com/css?family=Bigelow+Rules' rel='stylesheet' type='text/css'>
+
+</head>
+
+<div id ="heading">
+<h1><span id="cheese">Mots</span>arella</h1>
+<h2>Submitted Text so Far</h2>
+</div>
+<div id="container">
+
+
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @libs.each do |libs| %>
+    <tr>
+      <td><%= libs.title %></td>
+      <td><%= libs.text %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'Back', libs_path %>

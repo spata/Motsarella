@@ -1,0 +1,44 @@
+
+<head>
+<link href='http://fonts.googleapis.com/css?family=Bigelow+Rules' rel='stylesheet' type='text/css'>
+
+</head>
+
+<div id ="heading">
+<h1><a href="/" ><span id="cheese">Mots</span>arella</a></h1>
+<h2>Make me a Motsarella</h2>
+</div>
+<div id="container">
+<p>Choose a title and input your text.</p>
+<% if @libs.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@libs.errors.count, "error") %> prohibited
+      this post from being saved:</h2>
+    <ul>
+    <% @libs.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div> 
+  <% end %>
+
+<%= form_for :libs, url: libs_path do |f| %>
+
+
+<p>
+	<%= f.label :title %><br>
+    <%= f.text_field :title, :size => 52 %>
+  </p>
+
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_area :text %>
+  </p>
+ 
+  <p>
+    <%= f.submit "Submit"%>
+  </p>
+<% end %>
+
+
+</div>

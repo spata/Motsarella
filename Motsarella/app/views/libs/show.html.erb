@@ -1,0 +1,24 @@
+
+<head>
+<link href='http://fonts.googleapis.com/css?family=Bigelow+Rules' rel='stylesheet' type='text/css'>
+
+</head>
+
+<div id ="heading">
+<h1><a href="/" ><span id="cheese">Mots</span>arella</a></h1>
+<h2>Results of Submission</h2>
+</div>
+<div id="container">
+<p>
+  <strong>Title:</strong>
+  <%= @libs.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @libs.text %>
+  
+</p>
+
+<%= link_to 'Generate Motsarella', edit_lib_path(@libs.title) %>
+</div>
