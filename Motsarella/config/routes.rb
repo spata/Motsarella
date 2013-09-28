@@ -2,6 +2,7 @@ Motsarella::Application.routes.draw do
   get "welcome/index"
 
   resources :libs
+  resources :feeds
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
