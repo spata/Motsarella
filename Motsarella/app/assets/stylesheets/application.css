@@ -15,53 +15,73 @@
 body {
 	padding:0;
 	margin: 0;
+	word-wrap:break-word;
+	background-color: #f5f5f5;
+
 }
 #heading {
-	height:100px;
+	height:80px;
 	padding: 0;
 	margin-left:auto;
 	margin-right:auto;
-	max-width:75%;
+	max-width:600px;
 	padding:30px;
 	margin-bottom: 0px;
-	background-color: #eee;
-	font-family: 'Cookie', sans-serif;
+	font-family: 'Bigelow Rules', sans-serif;
+
 
 }
+#heading a {
+	color:inherit;
+	text-decoration:none;
+}
 #heading #cheese {
-	color:#fd893b;
+	color:#9b02fc;
 
 }
 
 #heading h1 {
 	padding-top:10px;
-	padding-left: 60px;
+	padding-left: 30px;
 	color:#444;
 	position:relative;
-	top:-40px;
-	font-size: 60px;
+	top:-75px;
+	font-size: 80px;
 }
 #heading h2 {
 	text-align:right;
-	padding-right:50px;
+	padding-right:20px;
 	position:relative;
-	top:-80px;
-	font-size: 45px;
+	color:#444;
+	top:-170px;
+	font-size: 50px;
 
 }
 
 /*---------------------COTNAINER----------------------*/
 #container {
+
 	margin-left:auto;
 	margin-right: auto;
 	min-width:300px;
-	max-width:75%;
+	max-width:600px;
 	border:1px solid #eee;
 	font-family: sans-serif;
 	padding:30px;
 	padding-top: 0px;
-
+	background-color: #fff;
+	word-wrap:break-word;
+	border:5px dotted #00ff00;
+	margin-bottom:20px;
 }
-#container a {
-	color:#fd893b;
+#container a, #container a:visited {
+	color:#03ad1f;
+}
+/*------------------------FORMS------------------------*/
+form {
+	text-align: right;
+}
+
+label{
+	float:left;
 }
