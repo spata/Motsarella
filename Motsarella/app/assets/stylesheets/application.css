@@ -11,3 +11,57 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+	padding:0;
+	margin: 0;
+}
+#heading {
+	height:100px;
+	padding: 0;
+	margin-left:auto;
+	margin-right:auto;
+	max-width:75%;
+	padding:30px;
+	margin-bottom: 0px;
+	background-color: #eee;
+	font-family: 'Cookie', sans-serif;
+
+}
+#heading #cheese {
+	color:#fd893b;
+
+}
+
+#heading h1 {
+	padding-top:10px;
+	padding-left: 60px;
+	color:#444;
+	position:relative;
+	top:-40px;
+	font-size: 60px;
+}
+#heading h2 {
+	text-align:right;
+	padding-right:50px;
+	position:relative;
+	top:-80px;
+	font-size: 45px;
+
+}
+
+/*---------------------COTNAINER----------------------*/
+#container {
+	margin-left:auto;
+	margin-right: auto;
+	min-width:300px;
+	max-width:75%;
+	border:1px solid #eee;
+	font-family: sans-serif;
+	padding:30px;
+	padding-top: 0px;
+
+}
+#container a {
+	color:#fd893b;
+}
