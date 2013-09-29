@@ -1,8 +1,17 @@
+
+require 'cgi'
 class LibsController < ApplicationController
 
 
 	def blanks
 		@libs = Libs.find(params)
+	end
+
+	def fill 
+
+		@libs = Libs.find(params[:lib_id])
+		
+
 	end
 
 	def edit
@@ -17,10 +26,11 @@ class LibsController < ApplicationController
 	def create
 
 		@libs = Libs.new(params[:libs])
-
+		@libs.blank = Array.new()
 		#issue: madlibs with the same title overwrite each other
 		
 	 	if @libs.save
+	 	#	@libs.blank="automated"
 	 		render "show"
 	 	else
 	 		render "new"
@@ -34,6 +44,7 @@ class LibsController < ApplicationController
 
 	def new
 		@libs = Libs.new
+
 	end
 
 	def show 

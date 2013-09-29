@@ -11,7 +11,22 @@
 <h2>Fill in the blanks</h2>
 </div>
 <div id="container">
-<p><%= @libs.title %></p>
-<p> <%= @result[0].text %></p>
-<p><%= @result[0].blank %></p>
+<p>You are currently filling out: <%= @libs.title %></p>
+
+
+
+
+
+<%= form_tag( "/libs/" +@libs.title.to_str() +"/fill", method:"get") do %>
+<input type='hidden' name='lib_id' <%= "value="+@libs.title %> />
+<% @result.each do |loopme| %>
+<%if loopme.blank != "" %>
+<%= label_tag(loopme.blank, "Insert a(n) "+loopme.blank)  %>
+<%= text_field_tag(loopme.blank) %> 
+<br/>
+<% end %>
+<% end %>
+
+<%= submit_tag "Submit" %>
+<% end %>
 </div>
