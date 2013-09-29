@@ -1,4 +1,7 @@
 require 'ostruct'
+require 'net/http'
+require 'rexml/document'
+
 
 class Libs < ActiveRecord::Base
 
@@ -6,6 +9,8 @@ class Libs < ActiveRecord::Base
 
 	ADJ = "Adjective"
 	NOUN = "Noun"
+	VERB = "Verb"
+	ADV = "Adverb"
 	ENDSPEECH = ""
 
 
@@ -19,25 +24,109 @@ class Libs < ActiveRecord::Base
 			
  	def generateLib
  	
- 		array = Array.new(3)
- 		array[0] = OpenStruct.new
- 		array[0].text = "first text before blank"
- 		array[0].blank = ADJ
- 		array[0].word = ""
+ 		pre  = Array.new
 
- 		array[1] = OpenStruct.new
- 		array[1].text = "and some more text"
- 		array[1].blank = NOUN
- 		array[1].word = ""
+		text2 = self.text.split(" ")
 
- 		array[2] = OpenStruct.new
- 		array[2].text = "last piece of text"
- 		array[2].blank = ENDSPEECH
- 		array[2].word = ""
 
- 		self.blank = array
- 		return array
+		parsed = Array.new(text2)
+		# filter -ing verbs
+		acc=""
+		parsed.each { |word| 
+			entry = OpenStruct.new
+			entry.word =""
+			if (word =~ /.*ing$/ )
+				entry.pos =  VERB
+				entry.before =  acc
+				pre.push entry
+				acc =""
+			elsif (word =~ /.*ly$/ ) 
+				entry.pos =  ADV
+				entry.before =  acc
+				pre.push entry
+				acc =""
+			else
+				acc = acc + word
+			end
+		}
+
+		blanksPOC = getblanks(pre)
+
+
+ 		 self.blank = blanksPOC
+ 		return blanksPOC
 
  	end
+
+
+
+def checkDictionary(word)
+	result =""
+	
+	# get the XML data as a string
+	
+	xml_data = Net::HTTP.get(URI.parse('http://www.dictionaryapi.com/api/v1/references/collegiate/xml/'+word+'?key=e0c03354-5753-4456-a1d7-6444244820db'))
+	
+	# extract information
+	doc = REXML::Document.new(xml_data)
+	pos = []
+	doc.elements.each('entry_list/entry/fl') do |ele|
+	   pos << ele.text
+	end
+
+
+	# collect all part of speech information into a list
+	poslist = Array.new
+	pos.each_with_index do |pos, idx|
+	   poslist.push "#{pos}"
+	end
+
+
+
+	# make the hash default to 0 so that += will work correctly
+	h = Hash.new(0)
+
+	# iterate over the array, counting duplicate entries
+	poslist.each do |v|
+	  h[v] += 1
+	end
+
+	h.each do |k, v|
+	  #puts "#{k} appears #{v} times"
+	end
+
+	return h
+end
+
+
+
+pre  = Array.new
+blanks  = Array.new
+maybe  = Array.new
+
+#word list
+def getblanks(wordlist)
+	b=Array.new
+
+	wordlist.each { |word| 
+	# count how many POS the word has
+	if (word.length >3) 
+		posHash = checkDictionary(word)
+		count = posHash.keys.length
+
+		if (count ==1)
+
+			b.push word
+
+		end 
+	end
+	}
+	return b
+end
+
+# text to parse
+
+
+
  # attr_accessible :, :text, :title
 end

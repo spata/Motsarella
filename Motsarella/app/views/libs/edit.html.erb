@@ -18,10 +18,10 @@
 
 
 <%= form_tag( "/libs/" +@libs.title.to_str() +"/fill", method:"get") do %>
-<input type='hidden' name='lib_id' <%= "value="+@libs.title %> />
+<input type="hidden" name="lib_id" <%= "value="+@libs.title %> />
 <% @result.each do |loopme| %>
-<%if loopme.blank != "" %>
-<%= label_tag(loopme.blank, "Insert a(n) "+loopme.blank)  %>
+<%if loopme.pos != "" %>
+<%= label_tag(loopme.pos, "Insert a(n) "+loopme.pos)  %>
 <%= text_field_tag(loopme.blank) %> 
 <br/>
 <% end %>

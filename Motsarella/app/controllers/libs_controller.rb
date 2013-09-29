@@ -9,8 +9,8 @@ class LibsController < ApplicationController
 
 	def fill 
 
-		@libs = Libs.find(params[:lib_id])
-		
+		@libs = Libs.find(params['lib_id'.to_sym()])
+		@par = params
 
 	end
 
