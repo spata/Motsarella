@@ -62,8 +62,8 @@ class LibsController < ApplicationController
 	end
 
 	def feed
-		String topic = "fun"
-		theOnion = "http://feeds.theonion.com/theonion/daily"
+		feedBurner = "?fmt=xml"
+		theOnion = ["http://feeds.theonion.com/theonion/daily",feedBurner].join("")
 		bbc = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
 		reddit = "http://www.reddit.com/search.xml?q=RSS+Readers&sort=new" #["http://www.reddit.com/search.xml?q=RSS+Readers&sort=", topic].join("")
 		engadget = "www.engadget.com/rss.xml"
