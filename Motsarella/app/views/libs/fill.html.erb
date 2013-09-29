@@ -1,0 +1,18 @@
+
+<% require 'pp' %>
+
+<head>
+<link href='http://fonts.googleapis.com/css?family=Bigelow+Rules' rel='stylesheet' type='text/css'>
+
+</head>
+
+<div id ="heading">
+<h1><a href="/" ><span id="cheese">Mots</span>arella</a></h1>
+<h2>And the new text is...</h2>
+</div>
+<div id="container">
+	<% @libs %><br/>
+	title="<% @libs.title %>"<br/>text="<% @libs.text %>"
+<br />x = '<% pp(@par) %>'<br/>
+	maybe you should go find a friend to play madlibs with now.
+</div>
