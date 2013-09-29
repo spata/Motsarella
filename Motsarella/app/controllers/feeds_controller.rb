@@ -7,8 +7,9 @@ require 'nokogiri'
 		String topic = "fun"
 		theOnion = "http://feeds.theonion.com/theonion/daily"
 		bbc = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
-		reddit = "http://www.reddit.com/rss.xml" #["http://www.reddit.com/search.xml?q=RSS+Readers&sort=", topic].join("")
+		reddit = "http://www.reddit.com/search.xml?q=RSS+Readers&sort=new" #["http://www.reddit.com/search.xml?q=RSS+Readers&sort=", topic].join("")
 		engadget = "www.engadget.com/rss.xml"
+		cracked = "http://feeds.feedburner.com/CrackedRSS?fmt=xml"
 	
 		rss = SimpleRSS.parse(
 			open(bbc)
