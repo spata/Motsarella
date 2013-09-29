@@ -17,7 +17,7 @@ body {
 	margin: 0;
 	word-wrap:break-word;
 	background-color: #f5f5f5;
-	font-family: 'Tekton Pro';
+
 
 }
 #heading {
@@ -85,4 +85,20 @@ form {
 
 label{
 	float:left;
+}
+
+.hideme {
+	display:none;
+}
+.ha {
+	color:#9b02fc;
+	font-weight:bold;
+}
+.madlibs {
+	line-height:200%;
+	font-size: 120%;
+}
+#dict {
+	height:100px;
+	width: 100px;
 }

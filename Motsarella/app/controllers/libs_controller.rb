@@ -1,9 +1,14 @@
 
 require 'cgi'
+
+require 'ostruct'
+
+
 require "open-uri"
 require "simple-rss"
 require "rubygems"
 require 'nokogiri'
+
 class LibsController < ApplicationController
 
 
@@ -12,15 +17,27 @@ class LibsController < ApplicationController
 	end
 
 	def fill 
-
+		#@word = Array.new
+		i = 0
 		@libs = Libs.find(params['lib_id'.to_sym()])
-		@par = params
+		@libs.blank = @libs.generateLib()
+		params.each do |k, v| 
+			if (k.match(/^[(Adverb|Verb)]/) )
+			#@word.push v
+			@libs.blank[i].filledin = v
+			i = i+1
+			end
+		end
+
+
+
 
 	end
 
 	def edit
 		@libs = Libs.find(params[:id])
 		@result = @libs.generateLib()
+
 	end
 
 	def index
@@ -52,7 +69,6 @@ class LibsController < ApplicationController
 
 	def new
 		@libs = Libs.new
-
 	end
 
 
@@ -61,9 +77,10 @@ class LibsController < ApplicationController
 		@libs = Libs.find(params[:id])
 	end
 
+
 	def feed
-		feedBurner = "?fmt=xml"
-		theOnion = ["http://feeds.theonion.com/theonion/daily",feedBurner].join("")
+		String topic = "fun"
+		theOnion = "http://feeds.theonion.com/theonion/daily"
 		bbc = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
 		reddit = "http://www.reddit.com/search.xml?q=RSS+Readers&sort=new" #["http://www.reddit.com/search.xml?q=RSS+Readers&sort=", topic].join("")
 		engadget = "www.engadget.com/rss.xml"
@@ -84,6 +101,7 @@ class LibsController < ApplicationController
 		#puts result #for test
 		return result
 	end
+
 
 end
 

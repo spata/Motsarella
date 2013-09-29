@@ -11,22 +11,33 @@
 <h2>Fill in the blanks</h2>
 </div>
 <div id="container">
-<p>You are currently filling out: <%= @libs.title %></p>
+<h3>You are currently filling out: <%= @libs.title %></h3>
 
 
 
-
+<% if (@result.count == 0) %>
+<p>We're sorry but we were unable to determine any parts of speech from the given document. </p>
+<p style="text-align:center;"><%= link_to "Try Again", "/libs/new" %></p>
+<%else%>
 
 <%= form_tag( "/libs/" +@libs.title.to_str() +"/fill", method:"get") do %>
 <input type="hidden" name="lib_id" <%= "value="+@libs.title %> />
+<% i = 0 %>
 <% @result.each do |loopme| %>
 <%if loopme.pos != "" %>
-<%= label_tag(loopme.pos, "Insert a(n) "+loopme.pos)  %>
-<%= text_field_tag(loopme.blank) %> 
+
+
+<%= label_tag(loopme.pos + i.to_s(), "Insert a(n) "+loopme.pos)  %>
+<%= text_field_tag(loopme.pos + i.to_s()) %> 
+
+
+
 <br/>
-<% end %>
+<div class="hideme"><%= i=i+1%></div><% end %>
 <% end %>
 
 <%= submit_tag "Submit" %>
+
+<%end%>
 <% end %>
 </div>

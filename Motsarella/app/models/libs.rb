@@ -15,12 +15,11 @@ class Libs < ActiveRecord::Base
 
 
 	set_primary_key :title
-	attr_accessible :text, :title, :blank
+	attr_accessible :text, :title, @blank
 
 	validates :title, presence: true,
 				length: {minimum: 5}
-	# validates :text, presence:true,
-	# 			length:{minimum:100}
+
 			
  	def generateLib
  	
@@ -30,10 +29,14 @@ class Libs < ActiveRecord::Base
 
 
 		parsed = Array.new(text2)
+
+		#nouns = getnouns(parsed)
+		#adjs = getnouns(parsed)
 		# filter -ing verbs
 		acc=""
+		entry = OpenStruct.new()
 		parsed.each { |word| 
-			entry = OpenStruct.new
+			entry= OpenStruct.new()
 			entry.filledin =""
 			if (word =~ /.*ing$/ )
 				entry.pos =  VERB
@@ -47,16 +50,37 @@ class Libs < ActiveRecord::Base
 				entry.word = word
 				pre.push entry
 				acc =""
+=begin
+			elsif (nouns.include? word) 
+				entry.pos =  NOUN
+				entry.before =  acc
+				entry.word = word
+				pre.push entry
+				acc =""
+			elsif (adj.include? word) 
+				entry.pos =  ADJ
+				entry.before =  acc
+				entry.word = word
+				pre.push entry
+				acc =""=end
+=end
+
 			else
-				acc = acc + word
+				acc = acc + " "+ word
 			end
 		}
+=begin
+		entry = OpenStruct.new()
+		entry.before = acc
+		entry.word=""
+		pre.push entry=end
+=end
 
-		blanksPOC = getblanks(pre)
+		@blank = Array.new()
+		@blank = getblanks(pre)
+		
 
-
- 		 self.blank = blanksPOC
- 		return blanksPOC
+ 		return @blank
 
  	end
 
@@ -93,9 +117,7 @@ def checkDictionary(word)
 	  h[v] += 1
 	end
 
-	h.each do |k, v|
-	  #puts "#{k} appears #{v} times"
-	end
+
 
 	return h
 end
@@ -112,8 +134,8 @@ def getblanks(wordlist)
 
 	wordlist.each { |word| 
 	# count how many POS the word has
-	if(word != nil && word != "") 
-		if (word.word.length >3) 
+	if(word != nil ) 
+		if (word.word.length >3 || word.word.length==0) 
 			posHash = checkDictionary(word.word)
 			count = posHash.keys.length
 
@@ -124,15 +146,62 @@ def getblanks(wordlist)
 			end 
 		end
 	end
+
 	}
 	return b
+	
 
 end
 
 # text to parse
 
+=begin
+#gets adjectives
+def getadjs(wordlist)
+	b=Array.new
+
+	wordlist.each { |word| 
+	# count how many POS the word has
+	if(word != nil && word != "") 
+		if (word.length >3) 
+			posHash = checkDictionary(word)
+			count = posHash.keys.length
+
+			if (count ==1&&posHash.keys.pop=="adjective")
+
+				b.push word
+
+			end 
+		end
+	end
+	}
+	return b
+
+end
+#gets nouns
+def getnouns(wordlist)
+	b=Array.new
+
+	wordlist.each { |word| 
+	# count how many POS the word has
+	if(word != nil && word != "") 
+		if (word.length >3) 
+			posHash = checkDictionary(word)
+			count = posHash.keys.length
+
+			if (count ==1&&posHash.keys.pop==)
+
+				b.push word
+
+			end 
+		end
+	end
+	}
+	return b=end
 
 
+end
+=end
  # attr_accessible :, :text, :title
 end
 

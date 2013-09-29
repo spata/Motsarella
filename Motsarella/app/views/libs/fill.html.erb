@@ -11,8 +11,21 @@
 <h2>And the new text is...</h2>
 </div>
 <div id="container">
-	<%= @libs %><br/>
-	title="<%= @libs.title %>"<br/>text="<%= @libs.text %>"
-<br/>x = '<%= pp(@par) %>'<br/>
-	maybe you should go find a friend to play madlibs with now.
+
+	<h3>You are currently playing <%= @libs.title %>.</h3>
+<div class="madlibs">	
+<p>
+<%= @libs.blank.each do |it| %>
+
+<%= it.before %>
+<span class="ha"><%= it.filledin %></span>
+<% end %>
+
+
+
+</p>
+<p style="text-align:center;">
+<%= link_to "Play Again", "/libs/new" %>
+</p>
+	</div>
 </div>
