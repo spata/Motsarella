@@ -30,7 +30,7 @@ class LibsController < ApplicationController
 	def create
 		@libs = Libs.new(params[:libs])
 		length = @libs.text.length
-		if length == 0
+		if length <= 100
 			@libs.text = feed
 			@libs.blank = Array.new()
 			#issue: madlibs with the same title overwrite each other
