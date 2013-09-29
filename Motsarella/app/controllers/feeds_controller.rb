@@ -20,7 +20,10 @@ require 'nokogiri'
 		puts page.class 
 		mainCon = page.css('div#main-content')[0] 
 		res = mainCon.css('p').text
-		puts res
+		#puts res #for Testing
+		result = String.try_convert(res)
+		#puts result #for test
+		return result
 	#end
 	
 
