@@ -34,15 +34,17 @@ class Libs < ActiveRecord::Base
 		acc=""
 		parsed.each { |word| 
 			entry = OpenStruct.new
-			entry.word =""
+			entry.filledin =""
 			if (word =~ /.*ing$/ )
 				entry.pos =  VERB
 				entry.before =  acc
+				entry.word = word
 				pre.push entry
 				acc =""
 			elsif (word =~ /.*ly$/ ) 
 				entry.pos =  ADV
 				entry.before =  acc
+				entry.word = word
 				pre.push entry
 				acc =""
 			else
@@ -110,18 +112,21 @@ def getblanks(wordlist)
 
 	wordlist.each { |word| 
 	# count how many POS the word has
-	if (word.length >3) 
-		posHash = checkDictionary(word)
-		count = posHash.keys.length
+	if(word != nil && word != "") 
+		if (word.word.length >3) 
+			posHash = checkDictionary(word.word)
+			count = posHash.keys.length
 
-		if (count ==1)
+			if (count ==1)
 
-			b.push word
+				b.push word
 
-		end 
+			end 
+		end
 	end
 	}
 	return b
+
 end
 
 # text to parse
