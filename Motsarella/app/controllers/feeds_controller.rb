@@ -2,8 +2,8 @@ require "open-uri"
 require "simple-rss"
 require "rubygems"
 require 'nokogiri'
-#class FeedsController < ApplicationController
-	#def feed
+class FeedsController < ApplicationController
+	def feed
 		String topic = "fun"
 		theOnion = "http://feeds.theonion.com/theonion/daily"
 		bbc = "http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"
@@ -25,7 +25,7 @@ require 'nokogiri'
 		result = String.try_convert(res)
 		#puts result #for test
 		return result
-	#end
+	end
 	
 
-#end
+end
